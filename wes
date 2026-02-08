@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine Proposal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: #ffebee;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+            background-image: linear-gradient(to bottom, #ffebee, #ffcdd2);
+            overflow-x: hidden;
+        }
+        
+        .container {
+            text-align: center;
+            max-width: 800px;
+            width: 100%;
+            position: relative;
+            z-index: 10;
+        }
+        
+        h1 {
+            color: #d32f2f;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2rem;
+            }
+        }
+        
+        .message {
+            background-color: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(211, 47, 47, 0.2);
+            margin-bottom: 30px;
+            border: 5px solid #ffccd5;
+        }
+        
+        .question {
+            font-size: 1.8rem;
+            color: #d32f2f;
+            margin-bottom: 40px;
+            line-height: 1.4;
+        }
+        
+        @media (max-width: 480px) {
+            .question {
+                font-size: 1.5rem;
+            }
+        }
+        
+        .buttons-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        @media (max-width: 480px) {
+            .buttons-container {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+            }
+        }
+        
+        .btn {
+            padding: 15px 40px;
+            font-size: 1.5rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+            min-width: 200px;
+        }
+        
+        @media (max-width: 480px) {
+            .btn {
+                padding: 15px 30px;
+                font-size: 1.3rem;
+                width: 100%;
+                max-width: 250px;
+            }
+        }
+        
+        .yes-btn {
+            background-color: #4caf50;
+            color: white;
+        }
+        
+        .yes-btn:hover {
+            background-color: #388e3c;
+        }
+        
+        .no-btn {
+            background-color: #f44336;
+            color: white;
+            position: relative;
+        }
+        
+        .no-btn:hover {
+            background-color: #d32f2f;
+        }
+        
+        .floating {
+            animation: floatAround 3s infinite ease-in-out;
+            pointer-events: none;
+            position: absolute !important;
+            cursor: default;
+        }
+        
+        @keyframes floatAround {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(20px, -30px) rotate(5deg); }
+            50% { transform: translate(-15px, 10px) rotate(-5deg); }
+            75% { transform: translate(25px, 20px) rotate(3deg); }
+            100% { transform: translate(0, 0) rotate(0deg); }
+        }
+        
+        .final-message {
+            font-size: 1.8rem;
+            color: #4caf50;
+            margin-top: 20px;
+            font-weight: bold;
+            padding: 15px;
+            background-color: #f1f8e9;
+            border-radius: 15px;
+            border: 3px solid #c8e6c9;
+            display: none;
+        }
+        
+        .heart-animation {
+            font-size: 4rem;
+            color: #e91e63;
+            animation: heartbeat 1.5s infinite;
+            margin-top: 20px;
+        }
+        
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+        
+        .decoration {
+            position: absolute;
+            z-index: 1;
+            opacity: 0.7;
+            pointer-events: none;
+        }
+        
+        .balloon {
+            width: 60px;
+            height: 80px;
+            border-radius: 50%;
+            position: absolute;
+            background-color: #ff4081;
+            box-shadow: inset -10px -10px 0 rgba(0,0,0,0.07);
+            animation: balloonFloat 6s ease-in-out infinite;
+        }
+        
+        .balloon:before {
+            content: "▲";
+            font-size: 15px;
+            color: #ff4081;
+            display: block;
+            text-align: center;
+            width: 100%;
+            position: absolute;
+            bottom: -15px;
+        }
+        
+        .balloon:nth-child(2) {
+            background-color: #7e57c2;
+            left: 10%;
+            top: 20%;
+            animation-delay: -1s;
+            width: 50px;
+            height: 70px;
+        }
+        
+        .balloon:nth-child(3) {
+            background-color: #29b6f6;
+            right: 10%;
+            top: 15%;
+            animation-delay: -2s;
+            width: 55px;
+            height: 75px;
+        }
+        
+        @keyframes balloonFloat {
+            0%, 100% { transform: translateY(0) rotate(-2deg); }
+            50% { transform: translateY(-20px) rotate(2deg); }
+        }
+        
+        .cat {
+            font-size: 2.5rem;
+            position: absolute;
+        }
+        
+        .cat:nth-child(4) {
+            left: 15%;
+            top: 60%;
+            color: #ff9800;
+            transform: rotate(15deg);
+        }
+        
+        .cat:nth-child(5) {
+            right: 15%;
+            top: 65%;
+            color: #795548;
+            transform: rotate(-15deg);
+        }
+        
+        .infinity {
+            font-size: 3rem;
+            position: absolute;
+            color: #e91e63;
+            opacity: 0.7;
+        }
+        
+        .infinity:nth-child(6) {
+            left: 20%;
+            top: 15%;
+            animation: spin 20s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .footer {
+            margin-top: 30px;
+            color: #880e4f;
+            font-size: 1.2rem;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <!-- Decorative elements -->
+    <div class="balloon decoration"></div>
+    <div class="balloon decoration"></div>
+    <div class="balloon decoration"></div>
+    <div class="cat decoration">🐱</div>
+    <div class="cat decoration">🐈</div>
+    <div class="infinity decoration">♾️</div>
+    
+    <div class="container">
+        <h1>Happy Valentine's Day! 💖</h1>
+        
+        <div class="message">
+            <div class="question">Will you be my Valentine? 💕</div>
+            
+            <div class="buttons-container">
+                <button class="btn yes-btn" id="yesBtn">YES! 💖</button>
+                <button class="btn no-btn" id="noBtn">NO 🙁</button>
+            </div>
+            
+            <div class="final-message" id="finalMessage">
+                Heheheheheheh thank you UGGO bss ab tou tumhari dherr saari treats done 💖♾️
+            </div>
+            
+            <div id="heartContainer"></div>
+        </div>
+        
+        <div class="footer">
+            Made with ❤️ for my UGGO
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const yesBtn = document.getElementById('yesBtn');
+            const noBtn = document.getElementById('noBtn');
+            const finalMessage = document.getElementById('finalMessage');
+            const heartContainer = document.getElementById('heartContainer');
+            
+            // Array of messages for NO button
+            const noMessages = [
+                "Please Uggo Maan Jao na",
+                "Meri Uggo nae ho?",
+                "Mithiye Please",
+                "Bugrhi Please", 
+                "CBTL pilau ga dher saari",
+                "Lanzhou v dher saara"
+            ];
+            
+            let clickCount = 0;
+            let isFloating = false;
+            
+            // NO button click handler
+            noBtn.addEventListener('click', function() {
+                if (isFloating) return;
+                
+                // Change NO button text
+                if (clickCount < noMessages.length) {
+                    noBtn.textContent = noMessages[clickCount];
+                    clickCount++;
+                }
+                
+                // After 6 clicks, change back to NO and make it float
+                if (clickCount === noMessages.length) {
+                    setTimeout(() => {
+                        noBtn.textContent = "NO 😢";
+                        
+                        // Make button float and non-clickable
+                        noBtn.classList.add('floating');
+                        noBtn.disabled = true;
+                        noBtn.style.cursor = 'default';
+                        isFloating = true;
+                        
+                        // Detach from container
+                        const rect = noBtn.getBoundingClientRect();
+                        noBtn.style.position = 'fixed';
+                        noBtn.style.left = `${rect.left}px`;
+                        noBtn.style.top = `${rect.top}px`;
+                    }, 300);
+                }
+            });
+            
+            // YES button click handler
+            yesBtn.addEventListener('click', function() {
+                // Show final message
+                finalMessage.style.display = 'block';
+                
+                // Hide NO button
+                noBtn.style.display = 'none';
+                
+                // Create heart animation
+                heartContainer.innerHTML = '<div class="heart-animation">❤️ ♾️</div>';
+                
+                // Change title
+                document.querySelector('h1').textContent = "YAY! Thank You! 💖";
+                document.querySelector('h1').style.color = '#4caf50';
+                
+                // Create floating hearts
+                for (let i = 0; i < 10; i++) {
+                    setTimeout(() => {
+                        createFloatingHeart();
+                    }, i * 300);
+                }
+            });
+            
+            // Function to create floating hearts
+            function createFloatingHeart() {
+                const heart = document.createElement('div');
+                heart.innerHTML = '❤️';
+                heart.style.position = 'fixed';
+                heart.style.fontSize = Math.random() * 30 + 20 + 'px';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.top = '100vh';
+                heart.style.color = '#e91e63';
+                heart.style.zIndex = '100';
+                heart.style.opacity = '0.9';
+                heart.style.pointerEvents = 'none';
+                
+                document.body.appendChild(heart);
+                
+                // Animate the heart
+                const animation = heart.animate([
+                    { transform: 'translateY(0) scale(1)', opacity: 0.9 },
+                    { transform: `translateY(-${window.innerHeight + 100}px) scale(0.5)`, opacity: 0 }
+                ], {
+                    duration: Math.random() * 3000 + 3000,
+                    easing: 'cubic-bezier(0.215, 0.61, 0.355, 1)'
+                });
+                
+                animation.onfinish = () => {
+                    heart.remove();
+                };
+            }
+            
+            // Add some initial floating hearts
+            for (let i = 0; i < 3; i++) {
+                setTimeout(() => {
+                    createFloatingHeart();
+                }, i * 1000);
+            }
+        });
+    </script>
+</body>
+</html>
